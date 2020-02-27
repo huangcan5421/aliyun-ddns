@@ -108,9 +108,21 @@ async function getExternalIP() {
         headers: {
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36'
         }
-    });
-    return res.data.replace('\n', '');
+	}).catch(e=>{
+        {
+        }})
+	if(res){
+		return res.data.replace('\n', '');
+	}
+	else{
+                console.log('开始请求 ihoshine.cn/ip')
+		let res = await axios.get('http://ihoshine.cn/ip', {timeout:10000, headers: {
+            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36'
+        }})
+		return res.data.replace('\n', '');
+	}
 }
+
 
 // 获取当前解析记录
 function getDomainInfo() {
